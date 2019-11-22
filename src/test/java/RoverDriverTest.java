@@ -1,18 +1,23 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 class RoverDriverTest {
 
-    private Rover rover;
     private RoverDriver roverDriver;
     private String command;
     private String output;
 
+    @Mock private Rover rover;
+
     @BeforeEach
     void setUp() {
-        given_a_rover();
         given_a_rover_driver();
     }
 
@@ -22,7 +27,11 @@ class RoverDriverTest {
 
         when_the_command_is_executed();
 
-        then_the_new_rover_position_is("0:0:E");
+        then_rover_driver_should_make_the_rover_turn_right();
+    }
+
+    private void then_rover_driver_should_make_the_rover_turn_right() {
+        verify(rover).rotateRight();
     }
 
     @Test
@@ -87,31 +96,11 @@ class RoverDriverTest {
         this.command = command;
     }
 
-    private void then_the_new_rover_position_is_01N() {
-        assertEquals("0:1:N", output);
-    }
-
-    private void then_the_new_rover_direction_is_west() {
-        assertEquals("0:0:W", output);
-    }
-
-    private void then_the_new_rover_direction_is_south() {
-        assertEquals("0:0:S", output);
-    }
-
-    private void then_the_new_rover_direction_is_east() {
-        assertEquals("0:0:E", output);
-    }
-
     private void when_the_command_is_executed() {
         output = roverDriver.executeCommand(command);
     }
 
     private void given_a_rover_driver() {
         roverDriver = new RoverDriver(rover);
-    }
-
-    private void given_a_rover() {
-        rover = new Rover();
     }
 }

@@ -17,7 +17,7 @@ public class RoverDriver {
                 rover.moveForward();
             }
         }
-        return String.format("%s:%s:%s", rover.getXCoordinate() , rover.getYCoordinate(), rover.getOrientation());
+        return String.format("%s:%s:%s", rover.getXCoordinate(), rover.getYCoordinate(), rover.getOrientation());
     }
 
 }

@@ -1,4 +1,5 @@
 public class Rover {
+
     private int y;
     private int x;
     private String orientation;
@@ -8,63 +9,52 @@ public class Rover {
         orientation = "N";
     }
 
-    public String getOrientation() {
-        return orientation;
-    }
-
-    public void newOrientation(String newOrientation) {
-        orientation = newOrientation;
-    }
-
     public int getYCoordinate() {
         return y;
-    }
-
-    public void setYCoordinate(int newY) {
-        y = newY;
     }
 
     public int getXCoordinate() {
         return x;
     }
 
-    public void setXCoordinate(int newX) {
-        x = newX;
+    public String getOrientation() {
+        return orientation;
     }
 
     void rotateLeft() {
-        if (getOrientation().equals("N")){
-            newOrientation("W");
-        } else if (getOrientation().equals("W")){
-            newOrientation("S");
-        } else if (getOrientation().equals("S")){
-            newOrientation("E");
-        } else if (getOrientation().equals("E")){
-            newOrientation("N");
+        if (orientation.equals("N")){
+            orientation = "W";
+        } else if (orientation.equals("W")){
+            orientation = "S";
+        } else if (orientation.equals("S")){
+            orientation = "E";
+        } else if (orientation.equals("E")){
+            orientation = "N";
         }
     }
 
     void rotateRight() {
-        if (getOrientation().equals("N")){
-            newOrientation("E");
-        } else if (getOrientation().equals("E")){
-            newOrientation("S");
-        } else if (getOrientation().equals("S")){
-            newOrientation("W");
-        } else if (getOrientation().equals("W")){
-            newOrientation("N");
+        if (orientation.equals("N")){
+            orientation = "E";
+        } else if (orientation.equals("E")){
+            orientation = "S";
+        } else if (orientation.equals("S")){
+            orientation = "W";
+        } else if (orientation.equals("W")){
+            orientation = "N";
         }
     }
 
     void moveForward() {
-        if ("E".equals(getOrientation())){
-            setXCoordinate(getXCoordinate() + 1);
-        } else if ("N".equals(getOrientation())){
-            setYCoordinate(getYCoordinate() + 1);
-        } else if ("W".equals(getOrientation())){
-            setXCoordinate(getXCoordinate() - 1);
-        } else if ("S".equals(getOrientation())){
-            setYCoordinate(getYCoordinate() - 1);
+        if ("E".equals(orientation)){
+            x ++;
+        } else if ("N".equals(orientation)){
+            y ++;
+        } else if ("W".equals(orientation)){
+            x --;
+        } else if ("S".equals(orientation)){
+            y --;
         }
     }
+
 }
