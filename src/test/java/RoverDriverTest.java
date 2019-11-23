@@ -1,18 +1,17 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RoverDriverTest {
 
     private RoverDriver roverDriver;
     private String command;
-    private String output;
 
     @Mock private Rover rover;
 
@@ -22,7 +21,7 @@ class RoverDriverTest {
     }
 
     @Test
-    void execute_command_with_a_r_should_change_the_direction_of_the_rover_to_east() {
+    void execute_the_r_command_should_call_the_rotate_right_method_on_the_rover() {
         given_a_command("R");
 
         when_the_command_is_executed();
@@ -30,53 +29,49 @@ class RoverDriverTest {
         then_rover_driver_should_make_the_rover_turn_right();
     }
 
-    private void then_rover_driver_should_make_the_rover_turn_right() {
-        verify(rover).rotateRight();
-    }
-
     @Test
-    void execute_command_with_a_rr_should_change_the_direction_of_the_rover_to_south() {
+    void execute_the_rr_command_should_call_the_rotate_right_method_twice_on_the_rover() {
         given_a_command("RR");
 
         when_the_command_is_executed();
 
-        then_the_new_rover_position_is("0:0:S");
+        then_rover_driver_should_make_the_rover_turn_right_twice();
     }
 
     @Test
-    void execute_command_with_a_rrr_should_change_the_direction_of_the_rover_to_west() {
+    void execute_the_rrr_command_should_call_the_rotate_right_method_three_times_on_the_rover() {
         given_a_command("RRR");
 
         when_the_command_is_executed();
 
-        then_the_new_rover_position_is("0:0:W");
+        then_rover_driver_should_make_the_rover_turn_right_three_times();
     }
 
     @Test
-    void execute_command_with_a_l_should_change_the_direction_of_the_rover_to_west() {
+    void execute_the_l_command_should_call_the_rotate_left_method_on_the_rover() {
         given_a_command("L");
 
         when_the_command_is_executed();
 
-        then_the_new_rover_position_is("0:0:W");
+        then_rover_driver_should_make_the_rover_turn_left();
     }
 
     @Test
-    void execute_command_with_a_m_should_move_the_y_coordinate_to_1() {
+    void execute_command_with_a_m_should_call_the_move_method_on_the_rover() {
         given_a_command("M");
 
         when_the_command_is_executed();
 
-        then_the_new_rover_position_is("0:1:N");
+        then_rover_driver_should_make_the_rover_move_forward();
     }
 
     @Test
-    void execute_command_with_a_mm_should_move_the_y_coordinate_to_2() {
+    void execute_command_with_a_m_should_call_the_move_method_twice_on_the_rover() {
         given_a_command("MM");
 
         when_the_command_is_executed();
 
-        then_the_new_rover_position_is("0:2:N");
+        then_rover_driver_should_make_the_rover_move_forward_twice();
     }
 
     @Test
@@ -85,22 +80,48 @@ class RoverDriverTest {
 
         when_the_command_is_executed();
 
-        then_the_new_rover_position_is("1:0:E");
-    }
-
-    private void then_the_new_rover_position_is(String expectedPosition) {
-        assertEquals(expectedPosition, output);
+        then_rover_driver_should_make_the_rover_rotate_right_and_then_move();
     }
 
     private void given_a_command(String command) {
         this.command = command;
     }
 
-    private void when_the_command_is_executed() {
-        output = roverDriver.executeCommand(command);
-    }
-
     private void given_a_rover_driver() {
         roverDriver = new RoverDriver(rover);
+    }
+
+    private void when_the_command_is_executed() {
+        roverDriver.executeCommand(command);
+    }
+
+    private void then_rover_driver_should_make_the_rover_rotate_right_and_then_move() {
+        InOrder inOrder = inOrder(rover);
+        inOrder.verify(rover).rotateRight();
+        inOrder.verify(rover).moveForward();
+    }
+
+    private void then_rover_driver_should_make_the_rover_move_forward_twice() {
+        verify(rover, times(2)).moveForward();
+    }
+
+    private void then_rover_driver_should_make_the_rover_move_forward() {
+        verify(rover, times(1)).moveForward();
+    }
+
+    private void then_rover_driver_should_make_the_rover_turn_left() {
+        verify(rover, times(1)).rotateLeft();
+    }
+
+    private void then_rover_driver_should_make_the_rover_turn_right_twice() {
+        verify(rover, times(2)).rotateRight();
+    }
+
+    private void then_rover_driver_should_make_the_rover_turn_right() {
+        verify(rover).rotateRight();
+    }
+
+    private void then_rover_driver_should_make_the_rover_turn_right_three_times() {
+        verify(rover, times(3)).rotateRight();
     }
 }

@@ -6,18 +6,26 @@ public class RoverDriver {
     }
 
     public String executeCommand(String command) {
-        for (char character: command.toCharArray()) {
-            if (character == 'R'){
-                rover.rotateRight();
-            }
-            if (character == 'L'){
-                rover.rotateLeft();
-            }
-            if (character == 'M'){
-                rover.moveForward();
-            }
-        }
+        computeEachCommand(command);
         return String.format("%s:%s:%s", rover.getXCoordinate(), rover.getYCoordinate(), rover.getOrientation());
+    }
+
+    private void computeEachCommand(String command) {
+        for (char character: command.toCharArray()) {
+            selectAction(character);
+        }
+    }
+
+    private void selectAction(char character) {
+        if (character == 'R'){
+            rover.rotateRight();
+        }
+        if (character == 'L'){
+            rover.rotateLeft();
+        }
+        if (character == 'M'){
+            rover.moveForward();
+        }
     }
 
 }
