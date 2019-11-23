@@ -9,6 +9,10 @@ public class RoverDriver {
         for (char character : command.toCharArray()) {
             selectAction(character);
         }
+        return roverPosition();
+    }
+
+    private String roverPosition() {
         return String.format("%s:%s:%s", rover.getXCoordinate(), rover.getYCoordinate(), rover.getOrientation());
     }
 
