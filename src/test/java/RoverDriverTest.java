@@ -92,7 +92,7 @@ class RoverDriverTest {
     }
 
     private void when_the_command_is_executed() {
-        roverDriver.executeCommand(command);
+        roverDriver.execute(command);
     }
 
     private void then_rover_driver_should_make_the_rover_rotate_right_and_then_move() {

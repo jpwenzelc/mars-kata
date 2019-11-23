@@ -5,15 +5,11 @@ public class RoverDriver {
         this.rover = rover;
     }
 
-    public String executeCommand(String command) {
-        computeEachCommand(command);
-        return String.format("%s:%s:%s", rover.getXCoordinate(), rover.getYCoordinate(), rover.getOrientation());
-    }
-
-    private void computeEachCommand(String command) {
-        for (char character: command.toCharArray()) {
+    public String execute(String command) {
+        for (char character : command.toCharArray()) {
             selectAction(character);
         }
+        return String.format("%s:%s:%s", rover.getXCoordinate(), rover.getYCoordinate(), rover.getOrientation());
     }
 
     private void selectAction(char character) {

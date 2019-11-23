@@ -25,7 +25,7 @@ public class MarsRoverAcceptance {
     }
 
     private void when_the_command_is_executed() {
-        output = roverDriver.executeCommand(command);
+        output = roverDriver.execute(command);
     }
 
     private void given_a_rover_driver() {
