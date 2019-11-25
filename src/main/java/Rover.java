@@ -5,7 +5,6 @@ public class Rover {
     private String orientation;
 
     public Rover() {
-        y = 0;
         orientation = "N";
     }
 
