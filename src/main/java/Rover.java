@@ -1,11 +1,11 @@
 public class Rover {
 
+    private Orientation orientation;
     private int y;
     private int x;
-    private String orientation;
 
     public Rover() {
-        orientation = "N";
+        this.orientation = new Orientation();
     }
 
     public int getYCoordinate() {
@@ -17,41 +17,25 @@ public class Rover {
     }
 
     public String getOrientation() {
-        return orientation;
+        return orientation.orientation;
     }
 
     void rotateLeft() {
-        if (orientation.equals("N")){
-            orientation = "W";
-        } else if (orientation.equals("W")){
-            orientation = "S";
-        } else if (orientation.equals("S")){
-            orientation = "E";
-        } else if (orientation.equals("E")){
-            orientation = "N";
-        }
+        orientation.rotateLeft();
     }
 
     void rotateRight() {
-        if (orientation.equals("N")){
-            orientation = "E";
-        } else if (orientation.equals("E")){
-            orientation = "S";
-        } else if (orientation.equals("S")){
-            orientation = "W";
-        } else if (orientation.equals("W")){
-            orientation = "N";
-        }
+        orientation.rotateRight();
     }
 
     void moveForward() {
-        if ("E".equals(orientation)){
+        if ("E".equals(orientation.orientation)){
             x ++;
-        } else if ("N".equals(orientation)){
+        } else if ("N".equals(orientation.orientation)){
             y ++;
-        } else if ("W".equals(orientation)){
+        } else if ("W".equals(orientation.orientation)){
             x --;
-        } else if ("S".equals(orientation)){
+        } else if ("S".equals(orientation.orientation)){
             y --;
         }
     }

@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RoverTest {
 
@@ -58,7 +57,7 @@ public class RoverTest {
     }
 
     private void then_the_orientation_should_be(String orientation) {
-        assertTrue(orientation.equals(rover.getOrientation()));
+        assertEquals(orientation, rover.getOrientation());
     }
 
     private void when_the_rover_rotates_left() {

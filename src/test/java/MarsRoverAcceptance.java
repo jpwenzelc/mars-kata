@@ -12,10 +12,9 @@ public class MarsRoverAcceptance {
     @Test
     void should_return_the_last_position_and_orientation() {
         given_a_rover();
-        given_a_string_of_commands();
         given_a_rover_driver();
 
-        when_the_command_is_executed();
+        when_a_command_is_executed();
 
         then_should_return_last_position_and_orientation();
     }
@@ -24,16 +23,13 @@ public class MarsRoverAcceptance {
         assertEquals("2:3:N", output);
     }
 
-    private void when_the_command_is_executed() {
+    private void when_a_command_is_executed() {
+        command = "MMRMMLM";
         output = roverDriver.execute(command);
     }
 
     private void given_a_rover_driver() {
         roverDriver = new RoverDriver(rover);
-    }
-
-    private void given_a_string_of_commands() {
-        command = "MMRMMLM";
     }
 
     private void given_a_rover() {
