@@ -57,7 +57,8 @@ public class RoverTest {
     }
 
     private void then_the_orientation_should_be(String orientation) {
-        assertEquals(orientation, rover.getOrientation());
+        assertEquals(String.format("0:0:%s",orientation)
+                , rover.currentLocalization());
     }
 
     private void when_the_rover_rotates_left() {

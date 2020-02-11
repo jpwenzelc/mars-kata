@@ -1,23 +1,11 @@
 public class Rover {
 
+    private Coordinate position;
     private Orientation orientation;
-    private int y;
-    private int x;
 
     public Rover() {
-        this.orientation = new Orientation();
-    }
-
-    public int getYCoordinate() {
-        return y;
-    }
-
-    public int getXCoordinate() {
-        return x;
-    }
-
-    public String getOrientation() {
-        return orientation.orientation;
+        position = new Coordinate(0,0);
+        orientation = new Orientation();
     }
 
     void rotateLeft() {
@@ -29,15 +17,11 @@ public class Rover {
     }
 
     void moveForward() {
-        if ("E".equals(orientation.orientation)){
-            x ++;
-        } else if ("N".equals(orientation.orientation)){
-            y ++;
-        } else if ("W".equals(orientation.orientation)){
-            x --;
-        } else if ("S".equals(orientation.orientation)){
-            y --;
-        }
+        position = position.moveForward(orientation);
+    }
+
+    public String currentLocalization(){
+        return String.format("%s:%s:%s", position.getX(), position.getY(), orientation.getOrientation());
     }
 
 }

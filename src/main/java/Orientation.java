@@ -1,17 +1,19 @@
 import java.util.Map;
 
+import static java.util.Map.*;
+
 public class Orientation {
 
-    String orientation;
+    private String orientation;
 
-    Map<String, String> right = Map.of(
+    private Map<String, String> right = of(
             "N","E",
             "E","S",
             "S","W",
             "W","N"
     );
 
-    Map<String,String> left = Map.of(
+    private Map<String,String> left = of(
             "N","W",
             "W","S",
             "S","E",
@@ -22,12 +24,20 @@ public class Orientation {
         orientation = "N";
     }
 
+    public Orientation(String orientation) {
+        this.orientation = orientation;
+    }
+
     void rotateLeft() {
         orientation = left.get(orientation);
     }
 
     void rotateRight() {
         orientation = right.get(orientation);
+    }
+
+    public String getOrientation() {
+        return orientation;
     }
 
 }
